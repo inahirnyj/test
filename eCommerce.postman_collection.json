@@ -1,0 +1,416 @@
+{
+	"info": {
+		"_postman_id": "efcff73d-bcec-4b99-96b4-3fd14e2ea258",
+		"name": "eCommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pre-requisites Copy",
+			"item": [
+				{
+					"name": "Install BDD",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setGlobalVariable('postmanBDD', responseBody);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://bigstickcarpet.com/postman-bdd/dist/postman-bdd.min.js",
+							"protocol": "http",
+							"host": [
+								"bigstickcarpet",
+								"com"
+							],
+							"path": [
+								"postman-bdd",
+								"dist",
+								"postman-bdd.min.js"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7887dd97-f4f7-49a9-8755-fe3cb1f6bd4b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?product=all",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "product",
+							"value": "all"
+						}
+					]
+				},
+				"description": "method which gets all products"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Particular Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7509ab54-2f52-4257-a506-bb06e5b97fc0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?product_id=19",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "product_id",
+							"value": "19"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign-up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ad44cdb-184e-4d4b-bfa3-539ba64d3f14",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"",
+							"",
+							"pm.test(\"Verify if USERNAME is proprely validated\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.username).to.eql('johnatan');",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "John"
+					},
+					{
+						"key": "surname",
+						"value": "Johnson"
+					},
+					{
+						"key": "email",
+						"value": "john.johnson@gmail.com"
+					},
+					{
+						"key": "password",
+						"value": "john-000"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "John",
+							"type": "text"
+						},
+						{
+							"key": "surname",
+							"value": "Johnson",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "j.j@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "my-pass-in-whatever-format",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product to Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ef995f3-c49c-4ef2-ba0c-96bd19eb649b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": \"19\",\n\t\"quantity\": \"my-quantity\"-{{$randomInt}},\n\t\"price\": \"193.23\"\n}"
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post?entity=product&action=add-to-cart",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "entity",
+							"value": "product"
+						},
+						{
+							"key": "action",
+							"value": "add-to-cart"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product Quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1aee290d-eb40-45fd-9a36-eb52557c42a0",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "product_id",
+							"value": "19",
+							"type": "text"
+						},
+						{
+							"key": "cart_id",
+							"value": "12398-23",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://postman-echo.com/put",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"put"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bea5635-858c-479c-b8d5-2352dd03c1e7",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product_id",
+							"value": "19",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "177.99",
+							"type": "text"
+						},
+						{
+							"key": "cart_id",
+							"value": "12398-23",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e38ef23e-d31f-4cef-9039-71ac1cd6946c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?product_id=19",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "product_id",
+							"value": "19"
+						}
+					]
+				},
+				"description": "Check if quantity is changed after particular user bought some."
+			},
+			"response": []
+		}
+	]
+}
