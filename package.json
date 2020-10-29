@@ -4,7 +4,7 @@
   "description": "Postman tests",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "api-tests-run": "echo \"newman run eCommerce.postman_collection.json"
   },
   "author": "Ivan Nahiernyy",
   "license": "ISC",
